@@ -3,61 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موقع مهند الرسمي</title>
+<title>MOHANNAD ADNAN | Car Service</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080d18;
+  background: #080c14;
   color: white;
-  text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 header {
-  padding: 25px;
-  background: #111a2c;
+  padding: 25px 15px;
+  text-align: center;
+  background: #101827;
   border-bottom: 2px solid #d4af37;
 }
 
 .logo {
-  color: #d4af37;
-  font-size: 32px;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #e5c45b;
   font-weight: bold;
 }
 
+header p { color: #bbb; }
+
 .hero {
-  padding: 85px 20px;
+  padding: 55px 20px;
+  text-align: center;
+  background: linear-gradient(160deg,#182338,#080c14);
 }
 
-h1 {
-  color: #d4af37;
-  font-size: 35px;
+.hero h1 {
+  color: #e5c45b;
+  font-size: 32px;
 }
 
-p {
-  color: #d5d5d5;
-  font-size: 18px;
+.hero p {
+  color: #ddd;
   line-height: 2;
 }
 
-button {
-  background: #d4af37;
-  color: #080d18;
-  border: none;
-  padding: 15px 35px;
+.container {
+  max-width: 520px;
+  margin: auto;
+  padding: 22px;
+}
+
+h2 {
+  color: #e5c45b;
+  text-align: center;
+}
+
+form {
+  background: #121b2b;
+  padding: 22px;
+  border-radius: 15px;
+  border: 1px solid #394052;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  color: #e5c45b;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #555d6d;
   border-radius: 8px;
+  background: #080c14;
+  color: white;
+  font-size: 16px;
+}
+
+textarea {
+  height: 90px;
+  resize: vertical;
+}
+
+button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px;
+  background: #d4af37;
+  border: none;
+  border-radius: 9px;
   font-size: 18px;
+  font-weight: bold;
   cursor: pointer;
 }
 
+button:active { opacity: .8; }
+
+.note {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
 footer {
-  background: #111a2c;
-  padding: 22px;
+  margin-top: 35px;
+  padding: 25px;
+  text-align: center;
+  background: #101827;
   color: #aaa;
 }
 </style>
@@ -66,29 +121,105 @@ footer {
 <body>
 
 <header>
-  <div class="logo">MOHANNAD</div>
-  <p>الموقع الرسمي</p>
+  <div class="logo">MOHANNAD ADNAN</div>
+  <p>CAR SERVICE & DELIVERY</p>
 </header>
 
 <section class="hero">
-  <h1>مرحباً بكم في عالمي</h1>
-
+  <h1>مشوارك علينا 🚘</h1>
   <p>
-    أهلاً وسهلاً بكم في موقعي الإلكتروني.
+    اطلب سيارتك أو خدمة التوصيل بسهولة.
     <br>
-    هنا تبدأ رحلتي في عالم الإبداع والتصميم والتقنية.
+    اختر الخدمة وأرسل طلبك وسنتواصل معك.
   </p>
-
-  <button onclick="alert('أهلاً وسهلاً بكم!')">
-    اكتشف المزيد
-  </button>
 </section>
 
+<div class="container">
+
+<h2>اطلب خدمتك الآن</h2>
+
+<form id="orderForm">
+
+<label>الاسم</label>
+<input id="name" type="text"
+placeholder="اكتب اسمك" required>
+
+<label>رقم هاتفك</label>
+<input id="phone" type="tel"
+placeholder="رقم التواصل" required>
+
+<label>اختر الخدمة</label>
+<select id="service" required>
+  <option value="">اختر الخدمة</option>
+  <option>أريد سيارة لمشوار</option>
+  <option>أريد خدمة توصيل</option>
+  <option>أحتاج سائقاً</option>
+  <option>أريد الانضمام كسائق</option>
+</select>
+
+<label>موقع الانطلاق</label>
+<input id="from" type="text"
+placeholder="من أين؟" required>
+
+<label>الوجهة</label>
+<input id="to" type="text"
+placeholder="إلى أين؟" required>
+
+<label>تفاصيل إضافية</label>
+<textarea id="details"
+placeholder="اكتب أي تفاصيل تريدها"></textarea>
+
+<button type="submit">
+إرسال الطلب عبر واتساب
+</button>
+
+<p class="note">
+سيتم فتح واتساب لإرسال طلبك وتأكيد التفاصيل.
+</p>
+
+</form>
+</div>
+
 <footer>
-  جميع الحقوق محفوظة © 2026
-  <br>
-  MOHANNAD
+  <div class="logo">MOHANNAD ADNAN</div>
+  <p>خدمتكم شرف لنا</p>
+  <p>© 2026 جميع الحقوق محفوظة</p>
 </footer>
+
+<script>
+document.getElementById("orderForm")
+.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const service = document.getElementById("service").value;
+  const from = document.getElementById("from").value;
+  const to = document.getElementById("to").value;
+  const details = document.getElementById("details").value;
+
+  const message =
+    "طلب خدمة جديد - MOHANNAD ADNAN\n" +
+    "الاسم: " + name + "\n" +
+    "رقم العميل: " + phone + "\n" +
+    "الخدمة: " + service + "\n" +
+    "من: " + from + "\n" +
+    "إلى: " + to + "\n" +
+    "التفاصيل: " + details;
+
+  const whatsappNumber = "967780482701";
+
+  if (whatsappNumber.includes("X")) {
+    alert("يجب إضافة رقم واتساب صاحب الخدمة أولاً.");
+    return;
+  }
+
+  const url = "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+});
+</script>
 
 </body>
 </html>
