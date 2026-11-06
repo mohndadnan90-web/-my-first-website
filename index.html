@@ -1,245 +1,177 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>بنك الكريمي للتمويل الاصغرالاسلامي</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مشاركة تجريبية</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
+  background: #713fc0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(145deg,#39205f,#713fc0);
-  color: white;
   text-align: center;
+  color: white;
 }
 
 header {
   background: white;
   color: #39265c;
-  padding: 16px 10px;
+  padding: 17px;
   font-size: 19px;
   font-weight: bold;
 }
 
-header small {
-  display: block;
-  font-size: 10px;
-  color: #9275b5;
-  margin-top: 5px;
-}
-
 .container {
-  width: 90%;
-  max-width: 370px;
-  margin: 35px auto;
+  max-width: 340px;
+  margin: 55px auto;
+  padding: 15px;
 }
 
 .card {
   background: white;
   color: #39265c;
   padding: 20px;
-  border-radius: 17px;
-  box-shadow: 0 10px 30px #21103855;
-}
-
-h2 {
-  font-size: 19px;
-  margin-top: 5px;
+  border-radius: 14px;
 }
 
 .qr {
   width: 95px;
   height: 95px;
-  margin: 15px auto;
   border: 2px dashed #713fc0;
-  border-radius: 10px;
+  border-radius: 8px;
+  margin: 12px auto;
   display: grid;
   place-items: center;
+  font-size: 15px;
   color: #713fc0;
-  font-size: 17px;
   font-weight: bold;
 }
 
 input {
   width: 100%;
   padding: 11px;
-  margin: 7px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 7px;
   text-align: center;
-  outline: none;
+  font-size: 14px;
 }
 
 button {
   width: 100%;
   padding: 11px;
-  margin-top: 8px;
   background: #713fc0;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: 7px;
+  font-size: 16px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #542b99;
-}
-
-#account {
+#success {
   display: none;
-  margin-top: 15px;
+  position: fixed;
+  inset: 0;
+  background: #0008;
+  justify-content: center;
+  align-items: center;
 }
 
-.balance {
-  background: #f2edfa;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 12px 0;
+.message {
+  background: #713fc0;
+  color: white;
+  width: 85%;
+  max-width: 300px;
+  padding: 30px 15px;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px #0004;
 }
 
-.balance strong {
-  display: block;
-  font-size: 24px;
-  margin-top: 8px;
-  color: #713fc0;
+.emoji {
+  font-size: 38px;
 }
-
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.actions button {
-  margin: 0;
-}
-
-.notice {
+small {
+  color: #777;
   font-size: 11px;
-  color: #ddd;
-  margin-top: 18px;
 }
-
-#result {
-  font-size: 13px;
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-  بنك مهند
-  <small>نموذج مصرفي تجريبي مستقل</small>
+  بنك الكريمي للتمويل الاصغر الاسلامي التجريبي
 </header>
 
 <div class="container">
+  <div class="card">
 
-<div class="card">
+    <h3>مشاركة تجريبية</h3>
 
-  <h2>مرحباً بك</h2>
-  <p>تجربة الدخول إلى الحساب التجريبي</p>
+    <div class="qr">QR DEMO</div>
 
-  <div class="qr">QR DEMO</div>
+    <p>أدخل رمزاً حسابك</p>
 
-  <input id="pin"
-  type="password"
-  maxlength="6"
-  placeholder="رمز تجريبي">
+    <input
+      id="code"
+      type="text"
+      maxlength="6"
+      placeholder="رمز حساب تجريبي">
 
-  <button onclick="verify()">دخول تجريبي</button>
+    <input
+      id="name"
+      type="text"
+      placeholder="أدخل اسمك الرباعي">
 
-  <p id="result"></p>
+    <button onclick="sendDemo()">
+      إرسال
+    </button>
 
-  <div id="account">
+    <p id="error" style="color:red;font-size:12px"></p>
 
-    <h2>حسابك التجريبي</h2>
-
-    <div class="balance">
-      الرصيد التجريبي
-      <strong id="balance">100,000</strong>
-      <small style="color:#713fc0">ريال يمني افتراضي</small>
-    </div>
-
-    <div class="actions">
-      <button onclick="transaction('إيداع')">إيداع</button>
-      <button onclick="transaction('سحب')">سحب</button>
-      <button onclick="transaction('تحويل')">تحويل</button>
-      <button onclick="showHistory()">العمليات</button>
-    </div>
-
-    <p id="operation"></p>
-    <div id="history"></div>
+    <small>محاكاة مستقلة  تجمع بيانات مصرفية.</small>
 
   </div>
-
 </div>
 
-<p class="notice">
-هذا نموذج محاكاة مستقل، لا يتبع بنك الكريمي
-ولا ينفذ معاملات مالية حقيقية.
-</p>
-
+<div id="success">
+  <div class="message">
+    <div class="emoji">🎉💜</div>
+    <h3>شكراً لك!</h3>
+    <p>لقد تمت المشاركة بنجاح</p>
+    <button onclick="closeMessage()">حسناً</button>
+  </div>
 </div>
 
 <script>
-let balance = 100000;
-let history = [];
+function sendDemo() {
+  const code = document.getElementById("code").value;
+  const name = document.getElementById("name").value.trim();
+  const error = document.getElementById("error");
 
-function verify() {
-  let pin = document.getElementById("pin").value;
-
-  if (!/^[0-9]{4,6}$/.test(pin)) {
-    document.getElementById("result").textContent =
-    "أدخل رمزاً تجريبياً من 4 إلى 6 أرقام";
+  if (!/^[0-9]{4,6}$/.test(code)) {
+    error.textContent = "أدخل رمزاً تجريبياً صحيحاً";
     return;
   }
 
-  document.getElementById("result").textContent =
-  "تم الدخول إلى الحساب التجريبي بنجاح";
-
-  document.getElementById("account").style.display = "block";
-  document.getElementById("pin").value = "";
-}
-
-function transaction(type) {
-  let amount = Number(prompt("أدخل مبلغاً تجريبياً"));
-
-  if (!Number.isFinite(amount) || amount <= 0) {
+  if (name.split(/\s+/).length < 4) {
+    error.textContent = "أدخل اسماً رباعياً تجريبياً";
     return;
   }
 
-  if (type === "سحب" || type === "تحويل") {
-    if (amount > balance) {
-      alert("الرصيد التجريبي غير كافٍ");
-      return;
-    }
-    balance -= amount;
-  } else {
-    balance += amount;
-  }
+  error.textContent = "";
+  document.getElementById("code").value = "";
+  document.getElementById("name").value = "";
 
-  history.push(type + " : " + amount.toLocaleString());
-
-  document.getElementById("balance").textContent =
-  balance.toLocaleString();
-
-  document.getElementById("operation").textContent =
-  "تمت العملية التجريبية: " + type;
+  document.getElementById("success").style.display = "flex";
 }
 
-function showHistory() {
-  document.getElementById("history").innerHTML =
-  history.length
-  ? history.map(item => "<p>" + item + "</p>").join("")
-  : "لا توجد عمليات تجريبية";
+function closeMessage() {
+  document.getElementById("success").style.display = "none";
 }
 </script>
 
