@@ -1,89 +1,103 @@
-html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نتصل نصل | خدمة التوصيل</title>
+<title>نموذج بنك تجريبي</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#101010;color:white}
-header{background:#080808;padding:25px;text-align:center;border-bottom:2px solid #d4af37}
-header h1{color:#d4af37;font-size:34px;margin:0}
-header p{color:#ddd}
-.container{max-width:650px;margin:30px auto;padding:20px}
-.card{background:#1d1d1d;border:1px solid #b8952e;border-radius:15px;padding:22px;margin-bottom:20px}
-h2{color:#d4af37}
-input,select,textarea{width:100%;padding:14px;margin:9px 0;border-radius:8px;border:1px solid #777;background:#292929;color:white;font-size:16px}
-button{width:100%;padding:15px;background:#d4af37;color:#111;border:0;border-radius:8px;font-size:18px;font-weight:bold;cursor:pointer}
-button:hover{background:#f0ce59}
-footer{text-align:center;padding:25px;color:#aaa}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #713fc0;
+  color: white;
+  text-align: center;
+}
+header {
+  background: white;
+  color: #39265c;
+  padding: 25px 10px;
+  font-size: 21px;
+  font-weight: bold;
+}
+.container {
+  max-width: 400px;
+  margin: 65px auto;
+  padding: 25px;
+}
+.card {
+  background: white;
+  color: #39265c;
+  border-radius: 15px;
+  padding: 25px;
+}
+.qr {
+  width: 150px;
+  height: 150px;
+  margin: 20px auto;
+  border: 3px dashed #713fc0;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+input {
+  width: 100%;
+  padding: 14px;
+  margin: 15px 0;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  text-align: center;
+}
+button {
+  width: 100%;
+  padding: 14px;
+  background: #713fc0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+}
+#result { margin-top: 15px; }
+small { color: #ddd; }
 </style>
 </head>
 <body>
+
 <header>
-<h1>اتصل نصل مع مهند</h1>
-<p>خدمة التوصيل والنقل بسهولة وأمان</p>
+  نموذج بنك الكريمي التجريبي
 </header>
 
 <div class="container">
-<div class="card">
-<h2>🚗 اطلب سيارة</h2>
-<input id="customer" placeholder="اسمك">
-<input id="phone" placeholder="رقم هاتفك" type="tel">
-<input id="from" placeholder="موقع الانطلاق">
-<input id="to" placeholder="المكان المطلوب الوصول إليه">
-<select id="type">
-<option>سيارة خاصة</option>
-<option>دراجة نارية</option>
-<option>توصيل أغراض</option>
-</select>
-<button onclick="sendOrder()">إرسال طلب التوصيل</button>
-</div>
+  <div class="card">
+    <h2>رمز QR تجريبي</h2>
+    <div class="qr">QR DEMO</div>
 
-<div class="card">
-<h2>🛵 انضم إلينا كسائق</h2>
-<p>هل تمتلك سيارة أو دراجة؟ سجّل معنا للعمل في خدمة التوصيل.</p>
-<input id="driver" placeholder="اسم السائق">
-<input id="driverphone" placeholder="رقم الهاتف" type="tel">
-<select id="vehicle">
-<option>سيارة</option>
-<option>دراجة نارية</option>
-</select>
-<button onclick="sendDriver()">التسجيل كسائق</button>
-</div>
+    <p>أدخل رمزاً تجريبياً فقط</p>
+    <input type="text" id="pin"
+      placeholder="رمز تجريبي"
+      maxlength="6">
 
-<div class="card">
-<h2>📞 تواصل معنا</h2>
-<p>نحن هنا لخدمتك.</p>
-<button onclick="location.href='https://wa.me/967780482701'">تواصل عبر واتساب</button>
+    <button onclick="verify()">تأكيد</button>
+    <p id="result"></p>
+  </div>
+  <p><small>هذا نموذج توضيحي غير تابع للبنك
+  ولا يطلب بيانات مصرفية حقيقية.</small></p>
 </div>
-</div>
-
-<footer>© 2026 نتصل نصل - جميع الحقوق محفوظة</footer>
 
 <script>
-const whatsapp="967780482701";
+function verify() {
+  const pin = document.getElementById("pin").value;
+  const result = document.getElementById("result");
 
-function sendOrder(){
-let msg="طلب توصيل جديد\n"+
-"الاسم: "+document.getElementById("customer").value+"\n"+
-"الهاتف: "+document.getElementById("phone").value+"\n"+
-"من: "+document.getElementById("from").value+"\n"+
-"إلى: "+document.getElementById("to").value+"\n"+
-"نوع الخدمة: "+document.getElementById("type").value;
-if(!document.getElementById("customer").value || !document.getElementById("phone").value){
-alert("يرجى إدخال الاسم ورقم الهاتف");
-return;
-}
-window.open("https://wa.me/"+whatsapp+"?text="+encodeURIComponent(msg),"_blank");
-}
+  if (!/^[0-9]{4,6}$/.test(pin)) {
+    result.textContent = "أدخل رمزاً تجريبياً من 4 إلى 6 أرقام";
+    return;
+  }
 
-function sendDriver(){
-let msg="تسجيل سائق جديد\n"+
-"الاسم: "+document.getElementById("driver").value+"\n"+
-"الهاتف: "+document.getElementById("driverphone").value+"\n"+
-"المركبة: "+document.getElementById("vehicle").value;
-if(!document.getElementById("driver").value || !document.getElementById("driverphone").value){
-alert("يرجى إدخال الاسم ورقم الهاتف");
-return;
+  result.textContent = "تم التحقق التجريبي بنجاح";
+  document.getElementById("pin").value = "";
 }
-window.open("https://wa.me/"+whatsapp+"?text="+encodeURIComponent(
+</script>
+
+</body>
+</html>
