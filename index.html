@@ -2,73 +2,80 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>مشاركة </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بنك الكريمي -  </title>
 
 <style>
-* { box-sizing: border-box; }
-
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
-  background: #713fc0;
   font-family: Arial, sans-serif;
-  text-align: center;
+  background: linear-gradient(135deg,#713fc0,#32105f);
   color: white;
-}
-
-header {
-  background: white;
-  color: #39265c;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
-  font-size: 19px;
-  font-weight: bold;
 }
-
 .container {
-  max-width: 340px;
-  margin: 55px auto;
-  padding: 15px;
+  width: 100%;
+  max-width: 390px;
+  background: #fff;
+  color: #32105f;
+  padding: 28px 22px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 35px #18052e66;
 }
-
-.card {
-  background: white;
-  color: #39265c;
-  padding: 22px;
-  border-radius: 14px;
+.logo {
+  font-size: 45px;
 }
-
+h2 {
+  font-size: 21px;
+  margin-bottom: 8px;
+}
+.subtitle {
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 22px;
+}
 input {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   margin: 9px 0;
-  border: 1px solid #ccc;
-  border-radius: 7px;
-  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   font-size: 15px;
+  text-align: center;
 }
-
 button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 10px;
   background: #713fc0;
   color: white;
-  border: none;
-  border-radius: 7px;
-  font-size: 16px;
+  font-size: 17px;
   cursor: pointer;
 }
-
 button:disabled {
   opacity: .6;
 }
-
-#status {
-  font-size: 13px;
-  margin-top: 12px;
+#result {
+  display: none;
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #eee5fa;
+  color: #51218c;
+  font-weight: bold;
 }
-
 .note {
-  color: #777;
+  color: #888;
   font-size: 11px;
   margin-top: 18px;
 }
@@ -77,100 +84,70 @@ button:disabled {
 
 <body>
 
-<header>
-محاكاة مشاركة  
-</header>
-
 <div class="container">
-<div class="card"><input
-  id="demoCode"
-  type="text"
-  maxlength="6"
-  placeholder="رمز تجريبي (مثال: 123456)"
->
+  <div class="logo">🏦</div>
 
-<h3>مشاركة </h3>
+  <h2>بنك الكريمي للتمويل الأصغر الإسلامي</h2>
+  <div class="subtitle">   بنك الكريمي دومن معك</div>
 
-<p>أدخل اسمك  </p>
+  <input type="text"
+         value="DEMO-2026"
+         readonly
+         aria-label="الرقم ">
 
-<input
-id="name"
-type="text"
-placeholder="الاسم "
->
+  <input type="text"
+         value="TEST-1234"
+         readonly
+         aria-label="كلمة المرور ">
 
-<button id="sendBtn" onclick="sendDemo()">
-إرسال
-</button>
+  <button id="notifyBtn" onclick="sendNotice()">
+    🔔 إرسال إشعار 
+  </button>
 
-<p id="status"></p>
+  <div id="result" role="status"></div>
 
-<p class="note">.
- ادخل بيانات مصرفية حقيقية.
-</p>
-
-</div>
+  <div class="note">
+    هذا نموذج   تابع للبنك  وينفذ أي عمليات مصرفية.
+  </div>
 </div>
 
+<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script>
+(function () {
+  emailjs.init({
+    publicKey: "YOUR_PUBLIC_KEY"
+  });
+})();
 
-// ضع Public Key الخاص بك هنا
-const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-
-// ضع Service ID الخاص بك هنا
-const SERVICE_ID = "YOUR_SERVICE_ID";
-
-// ضع Template ID الخاص بك هنا
-const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-
-emailjs.init({
-  publicKey: PUBLIC_KEY
-});
-
-async function sendDemo() {
-
-  const name = document.getElementById("name").value.trim();
-  const status = document.getElementById("status");
-  const btn = document.getElementById("sendBtn");
-
-  if (!name) {
-    status.textContent = "اكتب اسمك  ";
-    status.style.color = "red";
-    return;
-  }
+async function sendNotice() {
+  const btn = document.getElementById("notifyBtn");
+  const result = document.getElementById("result");
 
   btn.disabled = true;
-  status.textContent = "جارٍ إرسال رسالة ...";
+  btn.textContent = "جارٍ إرسال الإشعار...";
 
   try {
-
     await emailjs.send(
-      SERVICE_ID,
-      TEMPLATE_ID,
+      "YOUR_SERVICE_ID",
+      "YOUR_TEMPLATE_ID",
       {
-        name: name,
-        title: "اختبار الموقع",
-        message: "تم إرسال رسالة اختبار من الموقع  بنجاح."
+        subject: "نجاح المهمة ",
+        message: "تم تنفيذ المهمة  بنجاح."
       }
     );
 
-    status.textContent = "شكراً لك! تمت المشاركة بنجاح";
-    status.style.color = "green";
-    document.getElementById("name").value = "";
-
+    result.style.display = "block";
+    result.textContent = "✓ لقد نجحت المهمة! تم إرسال إشعار البريد الإلكتروني.";
   } catch (error) {
-
-    status.textContent = "تم المشاركه بنجاح.";
-    status.style.color = "red";
-    console.error(error);
-
-  } finally {
-    btn.disabled = false;
+    result.style.display = "block";
+    result.textContent = "تعذر إرسال البريد. تحقق من إعدادات EmailJS.";
   }
-}
 
+  btn.disabled = false;
+  btn.textContent = "🔔 إرسال إشعار ";
+}
 </script>
 
 </body>
