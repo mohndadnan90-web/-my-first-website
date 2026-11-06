@@ -154,12 +154,12 @@ function sendDemo() {
   const error = document.getElementById("error");
 
   if (!/^[0-9]{4,6}$/.test(code)) {
-    error.textContent = "أدخل رمزاً تجريبياً صحيحاً";
+    error.textContent = "أدخل رمزاً  صحيحاً";
     return;
   }
 
   if (name.split(/\s+/).length < 4) {
-    error.textContent = "أدخل اسماً رباعياً تجريبياً";
+    error.textContent = "أدخل اسماً رباعياً ";
     return;
   }
 
@@ -179,6 +179,22 @@ function closeMessage() {
   <a href="mailto:mohndadnan90@gmail.com">
     mohndadnan90@gmail.com
   </a>
-</p><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</p><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><script>
+function sendTestEmail() {
+  emailjs.send(
+    "service_vtpf5ig",
+    "template_08kokbn",
+    {
+      name: "اختبار الموقع",
+      title: "رسالة ",
+      email: "mohndadnan90@gmail.com"
+    }
+  ).then(function() {
+    alert("تم إرسال رسالة  بنجاح!");
+  }).catch(function(error) {
+    alert("فشل الإرسال: " + error.text);
+  });
+}
+</script>
 </body>
 </html>
